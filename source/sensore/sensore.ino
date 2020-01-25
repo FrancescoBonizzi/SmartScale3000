@@ -70,12 +70,10 @@ void setup() {
 
 void loop() {
   units = scale.get_units(), 10;
-  if (units < 0)
-  {
-    units = 0.00;
-  }
-Serial.println(units);
-  if (units > 0){
+ 
+  Serial.println(units);
+  
+  if (units > 1){
     Serial.println(units);
     if (!client.connect("arduinoClient")) {
       _connectToMQTT();
