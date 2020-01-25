@@ -7,7 +7,6 @@
     Width="1920"
     Height="1080"
     ResizeMode="NoResize"
-    PreviewMouseDown="Window_PreviewMouseDown"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">

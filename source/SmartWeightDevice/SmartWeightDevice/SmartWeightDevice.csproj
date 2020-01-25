@@ -144,5 +144,11 @@
     <Resource Include="images\oranges.jpg" />
     <Resource Include="images\yellow-apple.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScaleMessagesManager\ScaleMessagesManager.csproj">
+      <Project>{1c6d9db8-162c-4d66-831a-0c8204accc67}</Project>
+      <Name>ScaleMessagesManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
