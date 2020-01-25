@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageClassification.Score", "MachineLearningPlayground\ImageClassification\ImageClassification.Score.csproj", "{E7A34F9D-8729-4B36-A31D-FDFB559132DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWScreen", "..\SWScreen\SWScreen.csproj", "{14323A9C-E234-421E-9E45-5702A25C827E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWScreen", "SWScreen\SWScreen.csproj", "{14323A9C-E234-421E-9E45-5702A25C827E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
