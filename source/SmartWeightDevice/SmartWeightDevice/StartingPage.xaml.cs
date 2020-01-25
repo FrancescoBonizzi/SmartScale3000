@@ -15,7 +15,7 @@ namespace SmartWeightDevice
     public partial class StartingPage : System.Windows.Window
     {
         private ScaleManager _scaleManager;
-        private const string _title = "SmartWeight3000";
+        private const string _title = "SmartScale3000";
         private double _lastWeight = double.MaxValue;
 
         public StartingPage()

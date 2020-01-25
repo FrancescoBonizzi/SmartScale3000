@@ -51,7 +51,7 @@
                         FontFamily="ROCKETWILDNESS"
                         FontSize="80"
                         FontWeight="Bold"
-                        Text="SmartWeight3000" />
+                        Text="SmartScale3000" />
 
                 </StackPanel>
             </Grid>
