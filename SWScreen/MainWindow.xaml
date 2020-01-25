@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SWScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SmartWeight3000" Height="450" Width="800">
     <Grid>
-        <Button x:Name="takePhotoBtn" Content="Weigh!" HorizontalAlignment="Left" Margin="352,189,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Click="TakePhotoBtn_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" x:Name="TakePhotoBtn" Content="Weigh!" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="115" FontSize="20" Click="TakePhotoBtn_Click" Height="58" Padding="1"/>
+        <Grid Background="Red" Grid.Row="1">
+            <Image x:Name="ImageBox" />
+        </Grid>
+        <Label x:Name="FruitLabel" Content="Fruit Name" HorizontalAlignment="Left" Margin="37,32,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PrecisionLabel" Content="Precision" HorizontalAlignment="Left" Margin="37,63,0,0" VerticalAlignment="Top"/>
+
 
     </Grid>
 </Window>

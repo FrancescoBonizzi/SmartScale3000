@@ -21,7 +21,6 @@ namespace ImageClassification
             {
                 var modelScorer = new TFModelScorer(tagsTsv, imagesFolder, inceptionPb, labelsTxt);
                 modelScorer.Score();
-
             }
             catch (Exception ex)
             {
@@ -30,6 +29,7 @@ namespace ImageClassification
 
             ConsoleHelpers.ConsolePressAnyKey();
         }
+
 
         public static string GetAbsolutePath(string relativePath)
         {
