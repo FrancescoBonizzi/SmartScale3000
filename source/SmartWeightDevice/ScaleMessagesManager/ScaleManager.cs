@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -55,8 +56,15 @@ namespace ScaleMessagesManager
 
             if (IsTheSameWithTolerance(message.Weight, _lastWeight))
             {
-                _weightTimer = new Stopwatch();
-                _weightTimer.Start();
+                if (_weightTimer == null)
+                {
+                    _weightTimer = new Stopwatch();
+                    _weightTimer.Start();
+                }
+            }
+            else
+            {
+                _weightTimer = null;
             }
 
             _lastWeight = message.Weight;
@@ -71,7 +79,7 @@ namespace ScaleMessagesManager
             if (_weightTimer == null)
                 return false;
 
-            if (_weightTimer.Elapsed >= TimeSpan.FromSeconds(2))
+            if (_weightTimer.Elapsed >= TimeSpan.FromSeconds(1))
             {
                 _hasFinalWeight = true;
                 return true;
@@ -80,7 +88,7 @@ namespace ScaleMessagesManager
             return false;
         }
 
-        private bool IsTheSameWithTolerance(double? a, double? b, double tolerance = 0.05)
+        private bool IsTheSameWithTolerance(double? a, double? b, double tolerance = 5)
         {
             if (a == null || b == null)
                 return false;

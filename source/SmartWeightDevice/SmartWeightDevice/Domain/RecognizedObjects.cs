@@ -2,6 +2,8 @@
 {
     public enum RecognizedObjects
     {
+        Unrecognized,
+
         Apple,
         Orange,
         Banana

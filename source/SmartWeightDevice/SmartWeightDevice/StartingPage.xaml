@@ -1,8 +1,8 @@
 ﻿<Window
     x:Class="SmartWeightDevice.StartingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="1920"
     Height="1080"
@@ -19,31 +19,35 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" Source="images/logo.png" />
             <TextBlock
-                Grid.Row="1"
+                Grid.Row="2"
                 Margin="15"
+                x:Name="txtTitle"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontFamily="ROCKETWILDNESS"
                 FontSize="120"
                 FontWeight="Bold"
-                Text="SmartWeight3000" />
+                Text="SmartScale3000" />
             <TextBlock
-                Grid.Row="2"
-                Foreground="gray"
+                x:Name="txtPutAProduct"
+                Grid.Row="3"
+                Margin="25,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Margin="25, 0"
+                FontSize="40"
                 FontWeight="Light"
-                FontSize="40">
-               
-                Put a product on the
-                
-                <Run FontFamily="ROCKETWILDNESS" FontWeight="Bold" Foreground="Black"  Text="scale" />
-                
+                Foreground="gray">
+                Put a product on the<Run
+                    FontFamily="ROCKETWILDNESS"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="scale" />
+
             </TextBlock>
         </Grid>
 
