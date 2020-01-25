@@ -1,6 +1,10 @@
-﻿using SmartWeightDevice.Domain;
+﻿using BarcodeLib;
+using SmartWeightDevice.Domain;
 using SmartWeightDevice.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace SmartWeightDevice
 {
@@ -24,13 +28,29 @@ namespace SmartWeightDevice
             double weightGrams,
             RecognizedObjects recognizedObject)
         {
-            return new WeightedObjectInfos(
+            var weightedObjectInfos = new WeightedObjectInfos(
                 recognizedObject: recognizedObject,
                 weightKilograms: (double)weightGrams / 1_000.0,
                 calories: (_caloriesPerGram[recognizedObject] * weightGrams),
                 pricePerKgEuro: _pricesPerKilo[recognizedObject],
-                barCodePath: "images/sample-barcode.jpg",
                 mainImagePath: recognizedObject.MainImagePath());
+
+            var barcodeText = Math.Round(weightedObjectInfos.PriceEuro * 10000, 0).ToString().PadLeft(12, '0');
+            var barcodeGenerator = new Barcode();
+            
+            var barcodeImage = barcodeGenerator.Encode(
+                TYPE.UPCA,
+                barcodeText,
+                Color.Black,
+                Color.White,
+                290,
+                120);
+            var filename = Path.GetFullPath($"{Guid.NewGuid().ToString("N")}.jpg");
+            barcodeImage.Save(filename);
+
+            weightedObjectInfos.BarCodePath = filename;
+
+            return weightedObjectInfos;
         }
     }
 }

@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="1920"
-    AllowsTransparency="True"
     Height="1080"
+    AllowsTransparency="True"
     Background="LightGray"
     FontFamily="Segoe UI"
     ResizeMode="NoResize"
@@ -96,52 +96,65 @@
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
-            <Border
+            <Grid
                 Grid.Row="0"
-                Grid.RowSpan="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="3">
 
-                <Border.Background>
-                    <ImageBrush ImageSource="{Binding FruitImagePath}" Stretch="UniformToFill" />
-                </Border.Background>
+                <Grid.Background>
+                    <SolidColorBrush Opacity="0.7" Color="White" />
+                </Grid.Background>
 
-            </Border>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-            <Border
-                Grid.Row="0"
-                Grid.Column="1"
-                Width="350"
-                Padding="30"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                CornerRadius="0">
+                <Border
+                    Grid.Column="1"
+                    Width="350"
+                    Height="350"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                    <Image Source="{Binding FruitImagePath}" Stretch="Uniform" />
+                </Border>
 
-                <Border.Background>
-                    <SolidColorBrush Opacity="0.8" Color="White" />
-                </Border.Background>
+                <Border
+                    Grid.Column="0"
+                    Width="350"
+                    Height="350"
+                    Padding="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
 
-                <StackPanel Orientation="Vertical">
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.8" Color="White" />
+                    </Border.Background>
 
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontSize="80"
-                        Text="{Binding RecognizedObjectNameString}" />
+                    <StackPanel Orientation="Vertical">
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        FontSize="60"
-                        Text="{Binding WeightString}" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="80"
+                            Text="{Binding RecognizedObjectNameString}" />
 
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontSize="60"
-                        Text="{Binding PriceString}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            FontSize="60"
+                            Text="{Binding WeightString}" />
 
-                </StackPanel>
-            </Border>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            FontSize="60"
+                            Text="{Binding PriceString}" />
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
 
         </Grid>
 
@@ -192,14 +205,16 @@
             <Border
                 Width="300"
                 Margin="15"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
+                HorizontalAlignment="Center">
 
                 <Border.Background>
                     <SolidColorBrush Opacity="0.8" Color="White" />
                 </Border.Background>
 
-                <Image Margin="15" Source="images/sample-barcode.jpg" />
+                <Image
+                    Margin="15"
+                    Source="{Binding BarcodeImagePath}"
+                    Stretch="UniformToFill" />
 
             </Border>
 

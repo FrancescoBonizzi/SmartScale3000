@@ -18,6 +18,7 @@ namespace SmartWeightDevice.ViewModels
         public string PricePerKiloString { get; set; }
         public string CaloriesString { get; set; }
         public string FruitImagePath { get; set; }
+        public string BarcodeImagePath { get; set; }
 
         private readonly DispatcherTimer _timer;
         private const string _hourFormat = "HH:mm:ss";
@@ -52,6 +53,7 @@ namespace SmartWeightDevice.ViewModels
             PricePerKiloString = $"{Math.Round(recognizedObjectInfos.PricePerKgEuro, 3)}€/Kg";
             CaloriesString = $"{Math.Round(recognizedObjectInfos.Calories, 0)}cal / {Math.Round(recognizedObjectInfos.Joules, 0)}J";
             FruitImagePath = recognizedObjectInfos.MainImagePath;
+            BarcodeImagePath = recognizedObjectInfos.BarCodePath;
         }
 
         private void _timer_Tick(object sender, EventArgs e)
