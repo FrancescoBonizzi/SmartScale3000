@@ -73,6 +73,7 @@
     <Compile Include="StartingPage.xaml.cs">
       <DependentUpon>StartingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\XamlExtensions.cs" />
     <Page Include="WeightPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

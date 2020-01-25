@@ -14,7 +14,7 @@ namespace SmartWeightDevice
         private const string _hourFormat = "HH:mm:ss";
         private const string _dateFormat = "dd MMMM";
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(int weight)
         {
             Notifications = new ObservableCollection<string>();
             _timer = new DispatcherTimer()

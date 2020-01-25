@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="1920"
+    AllowsTransparency="True"
     Height="1080"
     Background="LightGray"
     FontFamily="Segoe UI"
@@ -40,9 +41,9 @@
                 <SolidColorBrush Opacity="0.7" Color="White" />
             </Grid.Background>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-                <Image Source="images/logo.png" Margin="10" />
+                <Image Margin="10" Source="images/logo.png" />
 
                 <TextBlock
                     Margin="15"
@@ -70,7 +71,7 @@
                 VerticalAlignment="Bottom"
                 FontSize="40"
                 FontWeight="Light"
-                Foreground="White"
+                Foreground="Black"
                 Text="{Binding Hour}" />
             <TextBlock
                 Grid.Row="1"
@@ -78,7 +79,7 @@
                 VerticalAlignment="Top"
                 FontSize="18"
                 FontWeight="Light"
-                Foreground="White"
+                Foreground="Black"
                 Text="{Binding Date}" />
 
         </Grid>

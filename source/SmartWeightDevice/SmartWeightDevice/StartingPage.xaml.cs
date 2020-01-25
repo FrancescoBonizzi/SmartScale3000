@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartWeightDevice.Extensions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SmartWeightDevice
 {
-    /// <summary>
-    /// Interaction logic for StartingPage.xaml
-    /// </summary>
     public partial class StartingPage : Window
     {
         public StartingPage()
         {
             InitializeComponent();
+
+            // Start ascolto coda
+        }
+
+        private void Window_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // TODO STOP Ascolto coda
+
+            var weightPage = new WeightPage(123);
+            weightPage.ShowDialog();
+
+            // TODO START ascolto coda
         }
     }
 }
