@@ -27,7 +27,7 @@ namespace ScaleMessagesManager
             Action<double> onWeightReceived,
             Action<double> onFinalWeightReceived)
         {
-            _mqttClient = new MqttClient(GetLocalIPAddress());
+            _mqttClient = new MqttClient("192.168.8.169");
             _onWeightReceived = onWeightReceived;
             _onFinalWeightReceived = onFinalWeightReceived;
 
@@ -102,17 +102,5 @@ namespace ScaleMessagesManager
             _mqttClient.MqttMsgPublishReceived -= Q_MqttMsgPublishReceived;
         }
 
-        private static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
     }
 }
