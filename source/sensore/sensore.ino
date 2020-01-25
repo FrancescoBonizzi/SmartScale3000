@@ -1,5 +1,6 @@
 #include <Ethernet.h>
 #include <PubSubClient.h>
+#include <ESP8266WiFi.h>
 
 #include "HX711.h"
 
@@ -7,8 +8,11 @@ HX711 scale;
 char ssid[] = "GL-MT300N-V2-2ae"; 
 char pass[] = "goodlife"; 
 
-IPAddress server(192, 168, 8, 169);
-float calibration_factor = 101; 
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+
+float calibration_factor = 400; 
 float units;
 float ounces;
 
@@ -25,18 +29,26 @@ void _connectToWIFI(){
     Serial.print(".");
   }
   Serial.println("");
-  Serial.println("Wi-Fi connected successfully");
-   Serial.println("LocalIP:");  Serial.print(WiFi.localIP(););
+  Serial.print("Wi-Fi connected successfully:");Serial.println(WiFi.localIP());
 }
 
 void _setupMQT(){
-  Serial.println("MQTT setup"):
-  client.setServer(server, 1883);
-  client.setCallback(callback);
+  Serial.println("MQTT setup");
+  client.setServer("192.168.8.169", 1883);
+
 }
-
+void _connectToMQTT(){
+   while (!client.connected()) {  
+     if (client.connect("arduinoClient")) {
+       return ;
+     }
+    Serial.print("failed, rc=");
+    Serial.print(client.state());
+    Serial.println(" try again in 5 seconds");
+    delay(1000);    
+  }
+}
 void _setupScale(){
-
   scale.begin(4, 0);
   scale.set_scale();
   scale.tare();  //Reset the scale to 0
@@ -47,13 +59,13 @@ void _setupScale(){
 }
 
 void setup() {
-  Serial.begin(38400);
+  Serial.begin(115200);
 
   _connectToWIFI();
   _setupMQT();
   _setupScale(); 
   
-  Serial.print("Started");  
+  Serial.println("All ok");  
 }
 
 void loop() {
@@ -62,12 +74,18 @@ void loop() {
   {
     units = 0.00;
   }
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
+Serial.println(units);
+  if (units > 0){
+    Serial.println(units);
+    if (!client.connect("arduinoClient")) {
+      _connectToMQTT();
+    } 
 
-    if (client.connect("arduinoClient")) {
-      Serial.println("connected");     
-      client.publish("pf/scale","{\"Weight\":0}");      
+    if (client.connect("arduinoClient")) {   
+      String s =  "{\"Weight\":";
+      s = s + units + "}";
+      client.publish("pf/scale", s.c_str());     
     } 
   }
+  delay(1000);
 }
