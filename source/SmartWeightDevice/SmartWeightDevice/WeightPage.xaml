@@ -103,7 +103,7 @@
                 Grid.ColumnSpan="3">
 
                 <Border.Background>
-                    <ImageBrush ImageSource="images/sample-fruits.jpg" Stretch="UniformToFill" />
+                    <ImageBrush ImageSource="{Binding FruitImagePath}" Stretch="UniformToFill" />
                 </Border.Background>
 
             </Border>
@@ -126,19 +126,19 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         FontSize="80"
-                        Text="APPLES" />
+                        Text="{Binding RecognizedObjectNameString}" />
 
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="0"
                         HorizontalAlignment="Center"
                         FontSize="60"
-                        Text="12Kg" />
+                        Text="{Binding WeightString}" />
 
                     <TextBlock
                         HorizontalAlignment="Center"
                         FontSize="60"
-                        Text="123€" />
+                        Text="{Binding PriceString}" />
 
                 </StackPanel>
             </Border>
@@ -178,14 +178,14 @@
                         VerticalAlignment="Center"
                         FontSize="40"
                         FontWeight="SemiBold"
-                        Text="5€/Kg" />
+                        Text="{Binding PricePerKiloString}" />
                     <TextBlock
                         Grid.Row="1"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         FontSize="25"
                         FontWeight="SemiBold"
-                        Text="45Kcal / 123Joule" />
+                        Text="{Binding CaloriesString}" />
                 </Grid>
             </Border>
 

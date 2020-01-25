@@ -1,17 +1,17 @@
 ﻿using SmartWeightDevice.Extensions;
+using SmartWeightDevice.ViewModels;
 using System.Windows;
 
 namespace SmartWeightDevice
 {
     public partial class WeightPage : Window
     {
-        private readonly MainWindowViewModel _viewModel;
+        private readonly WeightPageViewModel _viewModel;
 
-        public WeightPage(int weight)
+        public WeightPage(WeightPageViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new MainWindowViewModel(weight);
-            DataContext = _viewModel;
+            DataContext = viewModel;
 
             Opacity = 0;
             this.Animate(

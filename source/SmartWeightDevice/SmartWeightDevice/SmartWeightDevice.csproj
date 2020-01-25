@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\RecognizedObjects.cs" />
+    <Compile Include="Domain\WeightedObjectInfos.cs" />
+    <Compile Include="Extensions\Mappings.cs" />
+    <Compile Include="ScaleCoreCalculator.cs" />
     <Compile Include="StartingPage.xaml.cs">
       <DependentUpon>StartingPage.xaml</DependentUpon>
     </Compile>
@@ -92,7 +96,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\WeightPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -123,29 +127,15 @@
     <Resource Include="images\sample-barcode.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\sample-fruits.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\background-2.jpg" />
-    <Resource Include="images\background-3.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\background-4.jpg" />
-    <Resource Include="images\background-5.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\background-6.jpg" />
-    <Resource Include="images\background-7.jpg" />
-    <Resource Include="images\background-8.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\loader.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bananas.jpg" />
+    <Resource Include="images\oranges.jpg" />
+    <Resource Include="images\yellow-apple.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿using SmartWeightDevice.Extensions;
+﻿using SmartWeightDevice.Domain;
 using System.Windows;
 
 namespace SmartWeightDevice
@@ -9,14 +9,20 @@ namespace SmartWeightDevice
         {
             InitializeComponent();
 
-            // Start ascolto coda
+            // TODO START ascolto coda
         }
 
         private void Window_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // TODO STOP Ascolto coda
 
-            var weightPage = new WeightPage(123);
+            // START LOADER
+
+            // TODO Fai foto
+
+            var weightPage = new WeightPage(new ViewModels.WeightPageViewModel(
+                800,
+                RecognizedObjects.Apple));
             weightPage.ShowDialog();
 
             // TODO START ascolto coda
