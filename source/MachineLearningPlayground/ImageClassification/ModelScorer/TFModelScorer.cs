@@ -5,6 +5,7 @@ using Microsoft.ML;
 using ImageClassification.ImageDataStructures;
 using static ImageClassification.ModelScorer.ConsoleHelpers;
 using static ImageClassification.ModelScorer.ModelHelpers;
+using System.Diagnostics;
 
 namespace ImageClassification.ModelScorer
 {
@@ -23,6 +24,11 @@ namespace ImageClassification.ModelScorer
             this.imagesFolder = imagesFolder;
             this.modelLocation = modelLocation;
             this.labelsLocation = labelsLocation;
+            mlContext = new MLContext();
+        }
+
+        public TFModelScorer()
+        {
             mlContext = new MLContext();
         }
 
@@ -54,7 +60,7 @@ namespace ImageClassification.ModelScorer
 
         }
 
-        private PredictionEngine<ImageNetData, ImageNetPrediction> LoadModel(string dataLocation, string imagesFolder, string modelLocation)
+        public PredictionEngine<ImageNetData, ImageNetPrediction> LoadModel(string dataLocation, string imagesFolder, string modelLocation)
         {
             ConsoleWriteHeader("Read model");
             Console.WriteLine($"Model location: {modelLocation}");
@@ -104,6 +110,27 @@ namespace ImageClassification.ModelScorer
                 imageData.ConsoleWrite();
                 yield return imageData;
             }
+        }
+
+        public ImageNetDataProbability PredictSingleImageDataUsingModel(
+            string imagePath, 
+            string labelsLocation,
+            PredictionEngine<ImageNetData, ImageNetPrediction> model)
+        {
+            Debug.WriteLine($"Images folder: {imagePath}");
+            Debug.WriteLine($"Labels folder: {labelsLocation}");
+            var labels = ReadLabels(labelsLocation);
+            var testData = new ImageNetData { ImagePath = imagePath };
+
+            var probs = model.Predict(testData).PredictedLabels;
+            var imageData = new ImageNetDataProbability()
+            {
+                ImagePath = testData.ImagePath,
+                Label = string.Empty
+            };
+            (imageData.PredictedLabel, imageData.Probability) = GetBestLabel(labels, probs);
+            imageData.ConsoleWrite();
+            return imageData;
         }
     }
 }
