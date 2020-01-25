@@ -2,22 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmartWeightDevice"
-             StartupUri="MainWindow.xaml">
+             StartupUri="StartingPage.xaml">
     <Application.Resources>
 
-        <Style TargetType="{x:Type ListBoxItem}">
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
-
-        </Style>
     </Application.Resources>
 </Application>

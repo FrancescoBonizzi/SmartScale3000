@@ -3,20 +3,15 @@ using System.Windows;
 
 namespace SmartWeightDevice
 {
-    public partial class MainWindow : Window
+    public partial class WeightPage : Window
     {
         MainWindowViewModel _viewModel;
 
-        public MainWindow()
+        public WeightPage()
         {
             InitializeComponent();
             _viewModel = new MainWindowViewModel();
             DataContext = _viewModel;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            _viewModel.Notifications.Add(DateTime.Now.ToString());
         }
     }
 }
