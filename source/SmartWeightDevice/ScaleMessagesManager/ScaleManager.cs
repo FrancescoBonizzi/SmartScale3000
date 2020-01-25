@@ -16,7 +16,7 @@ namespace ScaleMessagesManager
         private readonly Action<double> _onWeightReceived;
         private readonly Action<double> _onFinalWeightReceived;
 
-        private List<double> _weightsReceived;
+        private readonly List<double> _weightsReceived;
         private double? _lastWeight = null;
 
         private Stopwatch _weightTimer;
@@ -73,6 +73,7 @@ namespace ScaleMessagesManager
 
             if (_weightTimer.Elapsed >= TimeSpan.FromSeconds(2))
             {
+                _hasFinalWeight = true;
                 return true;
             }
 

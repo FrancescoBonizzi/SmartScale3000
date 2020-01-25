@@ -45,7 +45,9 @@ namespace SmartWeightDevice
                 Color.White,
                 290,
                 120);
-            var filename = Path.GetFullPath($"{Guid.NewGuid().ToString("N")}.jpg");
+            var barcodeImageDirectory = "picturesBarcode";
+            Directory.CreateDirectory(barcodeImageDirectory);
+            var filename = Path.GetFullPath($@"{barcodeImageDirectory}/{Guid.NewGuid().ToString("N")}.jpg");
             barcodeImage.Save(filename);
 
             weightedObjectInfos.BarCodePath = filename;

@@ -32,6 +32,9 @@ namespace SWScreen
             var imagesFolder = Path.Combine(_assetsPath, "inputs", "images");
             var inceptionPb = Path.Combine(_assetsPath, "inputs", "inception", "tensorflow_inception_graph.pb");
 
+            Model = new TFModelScorer();
+            PredictionEngine = Model.LoadModel(tagsTsv, imagesFolder, inceptionPb);
+
             _worker.DoWork += WorkerOnDoWork;
             _worker.RunWorkerCompleted += WorkerCompleted;
             Model = new TFModelScorer();
@@ -102,6 +105,7 @@ namespace SWScreen
                     return bitmap;
                 }
             }
+
             return null;
         }
         

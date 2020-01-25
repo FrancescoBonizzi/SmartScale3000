@@ -6,8 +6,6 @@ namespace SmartWeightDevice
 {
     public partial class WeightPage : Window
     {
-        private readonly WeightPageViewModel _viewModel;
-
         public WeightPage(WeightPageViewModel viewModel)
         {
             InitializeComponent();
