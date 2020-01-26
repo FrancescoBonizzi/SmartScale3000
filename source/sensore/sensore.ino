@@ -34,7 +34,7 @@ void _connectToWIFI(){
 
 void _setupMQT(){
   Serial.println("MQTT setup");
-  client.setServer("192.168.8.169", 1883);
+  client.setServer("192.168.8.1", 1883);
 
 }
 void _connectToMQTT(){
