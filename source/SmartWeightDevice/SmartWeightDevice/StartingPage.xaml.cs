@@ -166,6 +166,9 @@ namespace SmartWeightDevice
                 case "Granny Smith":
                     return RecognizedObjects.Apple;
 
+                case "strawberry":
+                    return RecognizedObjects.Strawberry;
+
                 default:
                     return RecognizedObjects.Unrecognized;
             }

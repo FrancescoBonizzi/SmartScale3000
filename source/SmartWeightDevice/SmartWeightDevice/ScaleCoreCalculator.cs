@@ -15,6 +15,7 @@ namespace SmartWeightDevice
             [RecognizedObjects.Apple] = 1.98,
             [RecognizedObjects.Banana] = 1.98,
             [RecognizedObjects.Orange] = 2.78,
+            [RecognizedObjects.Strawberry] = 123
         };
 
         private readonly Dictionary<RecognizedObjects, double> _caloriesPerGram = new Dictionary<RecognizedObjects, double>()
@@ -22,6 +23,7 @@ namespace SmartWeightDevice
             [RecognizedObjects.Apple] = 0.52,
             [RecognizedObjects.Banana] = 0.89,
             [RecognizedObjects.Orange] = 0.47,
+            [RecognizedObjects.Strawberry] = 0.33
         };
 
         public WeightedObjectInfos Calculate(

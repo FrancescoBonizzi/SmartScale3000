@@ -6,6 +6,7 @@
 
         Apple,
         Orange,
-        Banana
+        Banana,
+        Strawberry
     }
 }

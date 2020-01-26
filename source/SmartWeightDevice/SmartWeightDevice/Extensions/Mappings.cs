@@ -16,6 +16,9 @@ namespace SmartWeightDevice.Extensions
 
                 case RecognizedObjects.Banana:
                     return "Bananas";
+
+                case RecognizedObjects.Strawberry:
+                    return "Strawberries";
             }
 
             return "WAT?!";
@@ -33,6 +36,9 @@ namespace SmartWeightDevice.Extensions
 
                 case RecognizedObjects.Banana:
                     return "images/bananas.jpg";
+
+                case RecognizedObjects.Strawberry:
+                    return "images/straw.jpg";
             }
 
             return null;

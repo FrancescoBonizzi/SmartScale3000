@@ -125,8 +125,16 @@ namespace SmartWeightDevice.ViewModels
                              Notifications.Add($"Bananas are a seasonal fruit in {strMonthName}!");
                              Notifications.Add("Buongustaio!");
                              break;
+
+                         case RecognizedObjects.Strawberry:
+                             if (!new[] { 2, 3, 4, 5 }.Any(a => a == DateTime.Now.Month))
+                                 Notifications.Add($"Stawberries are a seasonal fruit in {strMonthName}!");
+                             else
+                                 Notifications.Add(new NiceNotification($"You are buying off-season fruits. Strawberries are in season from February to May.", "Khaki"));
+                             break;
+
                      }
-             }));
+                 }));
         }
 
         private void _timer_Tick(object sender, EventArgs e)
