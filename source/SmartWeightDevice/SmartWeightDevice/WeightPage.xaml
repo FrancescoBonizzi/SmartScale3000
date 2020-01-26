@@ -20,7 +20,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="400" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="200" />
+                <RowDefinition Height="300" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Background="White">
@@ -102,7 +102,7 @@
 
                     <Border
                         Grid.Column="1"
-                        Width="350"
+                        Width="500"
                         Height="350"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -112,7 +112,7 @@
 
                     <Border
                         Grid.Column="0"
-                        Width="350"
+                        Width="500"
                         Height="350"
                         Padding="30"
                         HorizontalAlignment="Center"
@@ -161,8 +161,9 @@
 
                 <Border
                     Grid.Column="1"
-                    Width="300"
+                    Width="350"
                     Margin="15"
+                    Height="200"
                     HorizontalAlignment="Center">
 
                     <Border.Background>
@@ -179,22 +180,23 @@
                             Grid.Row="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="40"
+                            FontSize="50"
                             FontWeight="SemiBold"
                             Text="{Binding PricePerKiloString}" />
                         <TextBlock
                             Grid.Row="1"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="25"
+                            FontSize="35"
                             FontWeight="SemiBold"
                             Text="{Binding CaloriesString}" />
                     </Grid>
                 </Border>
 
                 <Border
-                    Width="300"
+                    Width="350"
                     Margin="15"
+                    Height="150"
                     HorizontalAlignment="Center">
 
                     <Border.Background>
@@ -230,7 +232,7 @@
                     Grid.Row="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    FontSize="40"
+                    FontSize="55"
                     FontWeight="Light"
                     Foreground="Black"
                     Text="{Binding Hour}" />
@@ -238,7 +240,7 @@
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    FontSize="18"
+                    FontSize="25"
                     FontWeight="Light"
                     Foreground="Black"
                     Text="{Binding Date}" />
@@ -263,7 +265,7 @@
                             x:Name="singleItemContainer"
                             Margin="15"
                             Padding="10"
-                            Background="LightGreen"
+                            Background="{Binding Color}"
                             RenderTransformOrigin="0.5,0">
 
                             <Border.RenderTransform>
@@ -275,7 +277,8 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 FontWeight="Bold"
-                                Text="{Binding}"
+                                Text="{Binding Text}"
+                                FontSize="20"
                                 TextWrapping="WrapWithOverflow" />
                         </Border>
 

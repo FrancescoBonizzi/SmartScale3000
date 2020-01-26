@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Timers;
 using uPLibrary.Networking.M2Mqtt;
 
 namespace ScaleMessagesManager
@@ -23,11 +24,14 @@ namespace ScaleMessagesManager
         private Stopwatch _weightTimer;
         private bool _hasFinalWeight = false;
 
+        private Timer _resetTimer = new Timer();
+        private readonly object _weightlock = new object();
+
         public ScaleManager(
             Action<double> onWeightReceived,
             Action<double> onFinalWeightReceived)
         {
-            _mqttClient = new MqttClient("192.168.8.169");
+            _mqttClient = new MqttClient("192.168.8.1");
             _onWeightReceived = onWeightReceived;
             _onFinalWeightReceived = onFinalWeightReceived;
 
@@ -41,37 +45,67 @@ namespace ScaleMessagesManager
             _mqttClient.Connect("BonizPc");
         }
 
+        private Timer CreateTimer()
+        {
+            var t = new Timer();
+            t.Elapsed += (o, e) =>
+            {
+                lock (_weightlock)
+                {
+                    var bt = Encoding.Default.GetBytes(JsonConvert.SerializeObject(new ScaleMessage()
+                    {
+                        Weight = 0
+                    }));
+                    Q_MqttMsgPublishReceived(null, new uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs("WhoCares", bt, false, 0, false));
+                }
+            };
+            t.Interval = 3000;
+            return t;
+        }
+
         private void Q_MqttMsgPublishReceived(object sender, uPLibrary.Networking.M2Mqtt.Messages.MqttMsgPublishEventArgs e)
         {
-            if (_hasFinalWeight)
-                return;
-
-            var messageString = Encoding.Default.GetString(e.Message);
-            if (string.IsNullOrWhiteSpace(messageString))
-                return;
-
-            var message = JsonConvert.DeserializeObject<ScaleMessage>(messageString);
-
-            _onWeightReceived(message.Weight);
-
-            if (IsTheSameWithTolerance(message.Weight, _lastWeight))
+            lock (_weightlock)
             {
-                if (_weightTimer == null)
+                _resetTimer?.Stop();
+                if (_hasFinalWeight)
+                    return;
+
+                var messageString = Encoding.Default.GetString(e.Message);
+                if (string.IsNullOrWhiteSpace(messageString))
+                    return;
+
+                var message = JsonConvert.DeserializeObject<ScaleMessage>(messageString);
+
+                _onWeightReceived(message.Weight);
+
+                if (IsTheSameWithTolerance(message.Weight, _lastWeight))
                 {
-                    _weightTimer = new Stopwatch();
-                    _weightTimer.Start();
+                    if (_weightTimer == null)
+                    {
+                        _weightTimer = new Stopwatch();
+                        _weightTimer.Start();
+                    }
+                }
+                else
+                {
+                    _weightTimer = null;
+                }
+
+                _lastWeight = message.Weight;
+                _weightsReceived.Add(message.Weight);
+
+                if (HasFinalWeight())
+                {
+                    _onFinalWeightReceived(message.Weight);
+                }
+                else
+                {
+                    _resetTimer = CreateTimer();
+                    _resetTimer.Start();
                 }
             }
-            else
-            {
-                _weightTimer = null;
-            }
-
-            _lastWeight = message.Weight;
-            _weightsReceived.Add(message.Weight);
-
-            if (HasFinalWeight())
-                _onFinalWeightReceived(message.Weight);
+                
         }
 
         private bool HasFinalWeight()
@@ -98,7 +132,14 @@ namespace ScaleMessagesManager
 
         public void StopListening()
         {
-            _mqttClient.Disconnect();
+            try
+            {
+                _mqttClient.Disconnect();
+            }
+            catch
+            {
+                // Sticazzi
+            }
             _mqttClient.MqttMsgPublishReceived -= Q_MqttMsgPublishReceived;
         }
 

@@ -3,6 +3,7 @@ using SmartWeightDevice.Domain;
 using SmartWeightDevice.Extensions;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +13,22 @@ namespace SmartWeightDevice.ViewModels
 {
     public class WeightPageViewModel : ViewModelBase
     {
-        public ObservableCollection<string> Notifications { get; set; }
+        public class NiceNotification
+        {
+            public NiceNotification(string text, string color)
+            {
+                Text = text;
+                Color = color;
+            }
+
+            public static implicit operator NiceNotification(string val) => new NiceNotification(val, "LightGreen");
+
+            public string Text { get; set; }
+            public string Color { get; set; }
+            
+        }
+
+        public ObservableCollection<NiceNotification> Notifications { get; set; }
         public string Date { get; set; }
 
         public string WeightString { get; set; }
@@ -33,7 +49,7 @@ namespace SmartWeightDevice.ViewModels
             double weight,
             RecognizedObjects recognizedObject)
         {
-            Notifications = new ObservableCollection<string>();
+            Notifications = new ObservableCollection<NiceNotification>();
             _timer = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromMilliseconds(500)
@@ -86,19 +102,27 @@ namespace SmartWeightDevice.ViewModels
                  DispatcherPriority.Background,
                  new Action(() =>
                  {
+                     var mfi = new System.Globalization.DateTimeFormatInfo();
+                     string strMonthName = mfi.GetMonthName(DateTime.Now.Month).ToString();
                      switch (recognizedObject)
                      {
                          case RecognizedObjects.Apple:
-                             Notifications.Add("If you buy other 200gr, you will get a 20% discount!");
+                             Notifications.Add($"Apples are a seasonal fruit in {strMonthName}!");
+                             Notifications.Add("If you buy 200gr more, you'll get a 20% discount!");
                              Thread.Sleep(500);
-                             Notifications.Add("There are also pears in discount!");
+                             Notifications.Add("Pears are discounted too!");
                              break;
 
                          case RecognizedObjects.Orange:
-                             Notifications.Add("Good choice! In this period C-Vitamin is important!");
+                             if (!new[] { 1, 6, 7, 8, 9, 10, 11, 12 }.Any(a => a == DateTime.Now.Month))
+                                 Notifications.Add($"Oranges are a seasonal fruit in {strMonthName}!");
+                             else
+                                 Notifications.Add(new NiceNotification($"You are buying off-season fruits. Oranges are in season from February to May.", "Khaki"));
+                             Notifications.Add("Good choice! In this period Vitamin C is important!");
                              break;
 
                          case RecognizedObjects.Banana:
+                             Notifications.Add($"Bananas are a seasonal fruit in {strMonthName}!");
                              Notifications.Add("Buongustaio!");
                              break;
                      }

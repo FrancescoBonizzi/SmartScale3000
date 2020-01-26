@@ -104,16 +104,21 @@ namespace SmartWeightDevice
                     {
                         // Stoppo l'ascolto della bilancia
                         _scaleManager.StopListening();
+                        RecognizedObjects fruit = RecognizedObjects.Unrecognized;
+                        for(int i = 0; i < 3 && fruit == RecognizedObjects.Unrecognized; ++i)
+                        {
+                            // Prendo l'immagine
+                            var image = CaptureCameraCallback();
+                            var fruitsDirectory = "picturesFruits";
+                            Directory.CreateDirectory(fruitsDirectory);
+                            var imagePath = Path.GetFullPath($@"{fruitsDirectory}/{image}-{Guid.NewGuid().ToString("N")}.jpg");
+                            image.Save(imagePath);
 
-                        // Prendo l'immagine
-                        var image = CaptureCameraCallback();
-                        var fruitsDirectory = "picturesFruits";
-                        Directory.CreateDirectory(fruitsDirectory);
-                        var imagePath = Path.GetFullPath($@"{fruitsDirectory}/{image}-{Guid.NewGuid().ToString("N")}.jpg");
-                        image.Save(imagePath);
+                            // Riconoscimento
+                            fruit = DoRecognizeObject(imagePath);
+                        }
 
-                        // Riconoscimento
-                        var fruit = DoRecognizeObject(imagePath);
+                        
 
                         StopLoader();
 
