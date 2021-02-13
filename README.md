@@ -1,4 +1,4 @@
-# SmartWeight
+# SmartScale 3000
 Hackaton 2020 iSolutions
 
 # <img src="https://github.com/FrancescoBonizzi/SmartScale3000/raw/master/presentation/0.jpg" alt="drawing" width="800"/>
